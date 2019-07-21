@@ -15,8 +15,8 @@ Output string must be two numbers separated by a single space, and highest numbe
 
 public static String HighAndLow(String numbers) {
 		
-        Integer max = 0;
-        Integer min = 0;
+        Integer max = null;
+        Integer min = null;
         
         if (numbers.length() == 0)
         	return "";
@@ -25,13 +25,34 @@ public static String HighAndLow(String numbers) {
         
         for (String num : nums)
         {
-            if (Integer.valueOf(num) >= max)
+            if (max == null || Integer.valueOf(num) > max)
             	max = Integer.valueOf(num);
             
-            if (Integer.valueOf(num) <= min)
+            if (min == null || Integer.valueOf(num) < min)
             	min = Integer.valueOf(num);
         }
 
         return "" + max + " " + min;
         
 	}
+
+  /* 
+  
+  Best Practice and Clever
+
+  public static String HighAndLow(String numbers) {
+
+        int min = Arrays.stream(numbers.split(" "))
+                        .mapToInt(i -> Integer.parseInt(i))
+                        .min()
+                        .getAsInt();
+
+        int max = Arrays.stream(numbers.split(" "))
+                        .mapToInt(i -> Integer.parseInt(i))
+                        .max()
+                        .getAsInt();
+
+        return String.format("%d %d", max, min);
+    }
+
+    */
